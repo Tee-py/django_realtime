@@ -2,9 +2,9 @@
 from django.urls import path, re_path
 from .consumers import *
 
-websocket_urlpatterns = [
+socket_urlpatterns = [
     #path('/ws/', ChatConsumer.as_asgi()),
-    re_path(r'/$', ChatConsumer.as_asgi()),
+    re_path(r'/$', NotificationConsumer.as_asgi()),
 ]
 
 

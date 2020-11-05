@@ -3,13 +3,13 @@ from channels.generic.websocket import WebsocketConsumer
 from .views import *
 import asyncio
 
-class ChatConsumer(WebsocketConsumer):
+class NotificationConsumer(WebsocketConsumer):
 
     def connect(self):
         self.accept()
         while True:
             asyncio.sleep(10)
-            self.send(text_data=json.dumps({
+            self.send(text_data=json.dumps({ 
                 'message': NotificationSerializer(Notification.objects.all(), many=True).data
             }))
 
