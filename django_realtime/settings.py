@@ -21,13 +21,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'notification'
+    'notification',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +62,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'django_realtime.wsgi.application'
+
+#channels
+ASGI_APPLICATION = "django_realtime.asgi.application"
 
 
 # Database
@@ -108,4 +114,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'

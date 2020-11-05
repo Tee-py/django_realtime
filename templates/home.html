@@ -1,8 +1,48 @@
+{% load static %}
 <html>
     <head>
         <title>Notification</title>
+        <!--script src="http://127.0.0.1:8001/channels/static/channels/js/websocketbridge.js" type="text/javascript"></script-->
     </head>
-    <body>
+    <body id="ello">
         <h1>Realtime Notification App with Django</h1>
+
+        <script>
+            const chatSocket = new WebSocket(
+                'ws://'
+                + window.location.host
+                + '/ws/'
+            );
+
+            chatSocket.onopen = (e) => {
+                console.log("Opened");
+                chatSocket.send(JSON.stringify({
+                    'message': "hello"
+                }));
+                console.log("sent")
+            };
+
+            chatSocket.onmessage = function(e) {
+                const data = JSON.parse(e.data);
+                console.log(e.data)
+                for (not of data.message) {
+                    document.getElementsByTagName('h1')[0].textContent += ('\n' + not.details + '\n');
+                }
+            };
+
+            chatSocket.onclose = function(e) {
+                console.error('Chat socket closed unexpectedly');
+            };
+
+            document.querySelector('#ell').onclick = function(e) {
+                const messageInputDom = document.querySelector('#chat-message-input');
+                const message = messageInputDom.value;
+                chatSocket.send(JSON.stringify({
+                    'message': message
+                }));
+                messageInputDom.value = '';
+            };
+             
+    </script>
     </body> 
 </html>
